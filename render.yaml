@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: event-booking-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+
+  - type: worker
+    name: event-booking-worker
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/queues/emailWorker.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromService:
+          name: event-booking-api
+          type: web
+          envVarKey: MONGODB_URI
+      - key: REDIS_URL
+        fromService:
+          name: event-booking-api
+          type: web
+          envVarKey: REDIS_URL
+      - key: RESEND_API_KEY
+        fromService:
+          name: event-booking-api
+          type: web
+          envVarKey: RESEND_API_KEY
+      - key: EMAIL_FROM
+        fromService:
+          name: event-booking-api
+          type: web
+          envVarKey: EMAIL_FROM

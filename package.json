@@ -1,0 +1,28 @@
+{
+  "name": "event-booking-system",
+  "version": "1.0.0",
+  "description": "Event Booking System API with RBAC, atomic bookings, and background email jobs",
+  "main": "src/boot.js",
+  "scripts": {
+    "start": "node src/boot.js",
+    "dev": "nodemon src/server.js",
+    "worker": "node src/queues/emailWorker.js",
+    "load-test": "node scripts/load-test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "bullmq": "^6.3.8",
+    "dotenv": "^18.0.1",
+    "express": "^5.2.1",
+    "ioredis": "^6.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.10.1",
+    "nodemon": "^3.1.14",
+    "resend": "^6.28.1"
+  }
+}
