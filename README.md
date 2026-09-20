@@ -146,7 +146,6 @@ Deployed on **Railway** (web `api` + background `worker`).
 
 > **Deployed URL:** https://api-production-27adf.up.railway.app  
 > Health: https://api-production-27adf.up.railway.app/health  
-> Dashboard: https://railway.com/project/35f77438-0efd-44c2-b853-afc3141edd26
 
 `SERVICE_ROLE=api|worker` selects the process via `src/boot.js`. Env vars are set in Railway (MongoDB, Redis, JWT, Resend).
 
